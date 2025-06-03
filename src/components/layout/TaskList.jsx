@@ -61,7 +61,7 @@ export default function TaskList({
     <>
       <section
         role="task-list"
-        data-label={label}
+        data-label={label.title}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         className="bg-white dark:bg-[#121316] shrink-0  w-[330px] rounded-lg shadow-lg flex flex-col overflow-hidden"

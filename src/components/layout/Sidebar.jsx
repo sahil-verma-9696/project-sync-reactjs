@@ -16,7 +16,7 @@ export function filterByPathname(item) {
 export default function Sidebar({ navItems, open }) {
   if (!navItems) return <Skeleton fallbackNavItems={fallbackNavItems} />;
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   const [activeItem, setActiveItem] = React.useState(
     navItems.filter(filterByPathname)[0].id
   );

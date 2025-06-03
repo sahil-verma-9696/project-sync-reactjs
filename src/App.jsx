@@ -16,7 +16,7 @@ export default function App() {
         navItems={navItems}
         fallbackNavItems={fallbackNavItems}
       />
-      <main className="size-full flex flex-col justify-center gap-2 flex-1 rounded-lg ">
+      <main className="size-full flex flex-col  gap-2 flex-1 rounded-lg overflow-y-auto">
         <Header setOpen={setShowSidebar} open={showSidebar} />
         <Outlet />
       </main>

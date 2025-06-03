@@ -10,8 +10,7 @@ import LocalStorageContext from "../../context/LocalStorage";
 
 export default function CreateTaskForm({ setShowForm, defaultLabel }) {
   const { showToast } = useContext(toasterContext);
-  const { setTasks } = useContext(taskContext);
-  const { labels } = useContext(LocalStorageContext);
+  const { labels,setTasks } = useContext(LocalStorageContext);
 
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);

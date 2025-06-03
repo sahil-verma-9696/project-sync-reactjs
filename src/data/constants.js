@@ -61,14 +61,14 @@ export const NEW_LABELS = [
 ];
 
 export const LABELS_COLOR = {
-  red: "border-red-500 bg-red-100",
-  yellow: "border-yellow-500 bg-yellow-100",
-  green: "border-green-500 bg-green-100",
-  gray: "border-gray-500 bg-gray-100",
-  purple: "border-purple-500 bg-purple-100",
-  blue: "border-blue-500 bg-blue-100",
-  orange: "border-orange-500 bg-orange-100",
-  pink: "border-pink-500 bg-pink-100",
+  red: "border-red-500 bg-red-100 text-red-500",
+  yellow: "border-yellow-500 bg-yellow-100 text-yellow-500",
+  green: "border-green-500 bg-green-100 text-green-500",
+  gray: "border-gray-500 bg-gray-100 text-gray-500",
+  purple: "border-purple-500 bg-purple-100 text-purple-500",
+  blue: "border-blue-500 bg-blue-100 text-blue-500",
+  orange: "border-orange-500 bg-orange-100 text-orange-500",
+  pink: "border-pink-500 bg-pink-100 text-pink-500",
 };
 
 export const LIMIT = {

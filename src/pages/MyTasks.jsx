@@ -8,14 +8,17 @@ import CreateLabelForm from "../components/form/CreateLabelForm";
 import LocalStorageContext from "../context/LocalStorage";
 
 export default function MyTasks() {
-  const { tasks, setTasks } = useContext(taskContext);
   const { showToast } = useContext(toasterContext);
-  const { labels } = useContext(LocalStorageContext);
+  const { labels, tasks, setTasks } = useContext(LocalStorageContext);
+
+  console.log(tasks);
+
   const [labelFormState, setLabelFormState] = useState("");
 
   const handleDrop = (e) => {
     const newLabel = e.currentTarget.dataset.label;
     const draggedTaskId = e.dataTransfer.getData("text/plain");
+
     setTasks((prev) =>
       prev.map((task) =>
         task.id === draggedTaskId ? { ...task, label: newLabel } : task
@@ -44,7 +47,7 @@ export default function MyTasks() {
       <TaskList
         key={label.id}
         label={label}
-        tasks={labelFilter(label)}
+        tasks={labelFilter(label.title)}
         handleDrop={handleDrop}
         handleDragOver={handleDragOver}
         handleDeleteTask={handleDeleteTask}
