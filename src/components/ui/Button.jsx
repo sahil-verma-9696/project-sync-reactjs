@@ -1,6 +1,10 @@
-export function CreateBtn({ label, ...props }) {
+import { Plus } from "lucide-react";
+
+export function CreateTaskBtn({ label, openTaskForm, ...props }) {
+  const handleClick = () => openTaskForm(true);
   return (
     <button
+      onClick={handleClick}
       {...props}
       className="dark:text-white py-2 text-center cursor-pointer hover:bg-[#1A1B1E]"
     >
@@ -28,6 +32,17 @@ export function CloseBtn({ label, ...props }) {
       {...props}
     >
       {label}
+    </button>
+  );
+}
+export function AddNewLabelBtn({ openLabelForm }) {
+  const handleClick = () => openLabelForm(true);
+  return (
+    <button
+      onClick={handleClick}
+      className="dark:bg-[#262c36] h-fit p-2 rounded-lg cursor-pointer"
+    >
+      <Plus />
     </button>
   );
 }

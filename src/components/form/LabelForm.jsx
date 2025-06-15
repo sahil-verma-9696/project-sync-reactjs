@@ -57,9 +57,11 @@ export default function LabelForm({ oldLabel, isEdit = false, closeForm }) {
     isEdit ? updateLabel() : createLabel();
   }
 
+  const handleFormClose = () => closeForm(false);
+
   return (
     <div
-      onClick={closeForm}
+      onClick={handleFormClose}
       className="fixed w-screen h-screen bg-transparent top-0 left-0 flex justify-center items-center "
     >
       <form
@@ -90,7 +92,7 @@ export default function LabelForm({ oldLabel, isEdit = false, closeForm }) {
 
         <div className="flex gap-2 justify-end">
           <AddBtn label={"Save"} />
-          <CloseBtn label={"Cancel"} onClick={closeForm} />
+          <CloseBtn label={"Cancel"} onClick={handleFormClose} />
         </div>
       </form>
     </div>

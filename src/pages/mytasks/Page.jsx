@@ -1,58 +1,51 @@
-import React, { useContext, useState } from "react";
-import { LABELS } from "../../data/constants";
-import { Plus } from "lucide-react";
-import { toasterContext } from "../../context/Toaster";
+import React, { useContext, useEffect, useState } from "react";
 import TaskList from "./components/TaskList";
 import LabelForm from "../../components/form/LabelForm";
 import LocalStorageContext from "../../context/LocalStorage";
+import { filterTasksByLabel } from "../../utils/filters";
+import { AddNewLabelBtn } from "../../components/ui/Button";
+import useDragDrop from "./hooks/useDragDrop";
 
 export default function Page() {
-  const { showToast } = useContext(toasterContext);
-  const { labels, tasks, setTasks } = useContext(LocalStorageContext);
+  const { labels, tasks } = useContext(LocalStorageContext);
   const [showLabelForm, setShowLabelForm] = useState(false);
+  const { handleDrop } = useDragDrop();
 
-  const handleDrop = (e) => {
-    const newLabel = e.currentTarget.dataset.label;
-    const draggedTaskId = e.dataTransfer.getData("text/plain");
+  const [title, setTitle] = useState("");
 
-    const mapToUpdatedLabel = (task) =>
-      task.id === draggedTaskId ? { ...task, label: newLabel } : task;
-    setTasks((prev) => prev.map(mapToUpdatedLabel));
+  function mapToTaskList(label) {
+    const tasksByLabel = filterTasksByLabel(tasks, label.title);
+    const filterByInputTitle = (task) => task.title.startsWith(title.trim());
 
-    const findByDraggedTaskId = (task) => task.id === draggedTaskId;
-    const task = tasks.find(findByDraggedTaskId);
-    showToast(`${task.title} moved to ${LABELS[newLabel].title}`, "success");
-  };
-
-  function handleDragOver(e) {
-    e.preventDefault();
-  }
-
-  const filterByLabel = (label) => tasks.filter((task) => task.label === label);
-
-  function renderTaskList(label) {
     return (
       <TaskList
         key={label.id}
         label={label}
-        tasks={filterByLabel(label.title)}
+        tasks={tasksByLabel.filter(filterByInputTitle)}
         handleDrop={handleDrop}
-        handleDragOver={handleDragOver}
       />
     );
   }
 
+  useEffect(() => {
+    console.log(title);
+  }, [title]);
   return (
-    <div className="flex gap-2 w-[1456px] overflow-auto ">
-      {labels.map(renderTaskList)}
-      <span
-        onClick={() => setShowLabelForm(true)}
-        className="dark:bg-[#262c36] h-fit p-2 rounded-lg cursor-pointer"
-      >
-        <Plus />
-      </span>
-
-      {showLabelForm && <LabelForm closeForm={() => setShowLabelForm(false)} />}
+    <div>
+      <section>
+        <input
+          className="m-1 p-1 rounded-lg px-2 dark:bg-[#131416]"
+          type="text"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          placeholder="Search by title"
+        />
+      </section>
+      <section className="flex gap-2 w-[1456px] overflow-auto ">
+        {labels.map(mapToTaskList)}
+        <AddNewLabelBtn openLabelForm={setShowLabelForm} />
+        {showLabelForm && <LabelForm closeForm={setShowLabelForm} />}
+      </section>
     </div>
   );
 }

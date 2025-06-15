@@ -4,14 +4,7 @@ import LocalStorageContext from "../../../context/LocalStorage";
 import { toasterContext } from "../../../context/Toaster";
 import TaskForm from "../../../components/form/TaskForm";
 import { Clock } from "lucide-react";
-
-function dueDateFormater(dueDate) {
-  return new Date(dueDate).toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-}
+import { dueDateFormater } from "../../../utils/formaters";
 
 function getOverDue(dueDate) {
   if (!dueDate) return null;
@@ -41,7 +34,7 @@ export default function Task({
   const { showToast } = useContext(toasterContext);
   const [showTaskForm, setShowTaskForm] = useState(false);
 
-  const handleDeleteTask = (id) => {
+  const deleteTask = (id) => {
     const filterByCurrentTaskId = (task) => task.id !== id;
     setTasks((prev) => prev.filter(filterByCurrentTaskId));
     showToast("Task deleted successfully", "success");
@@ -66,9 +59,8 @@ export default function Task({
         <span className="absolute top-0 right-0">
           <Menu
             data-id={id}
-            onDelete={() => handleDeleteTask(id)}
+            onDelete={() => deleteTask(id)}
             onEdit={() => setShowTaskForm(true)}
-            positionClass="top-6 right-0"
           />
         </span>
         <div className="flex flex-col">
@@ -82,6 +74,7 @@ export default function Task({
           </span>
         </div>
       </div>
+      {/* Popup Components */}
       {showTaskForm && (
         <TaskForm
           isEdit={true}

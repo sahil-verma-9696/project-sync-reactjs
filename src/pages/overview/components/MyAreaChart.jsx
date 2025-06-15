@@ -41,7 +41,7 @@ export default function MyAreaChart({ tasks, labels }) {
 
   const trendData = Object.values(trendByLabel);
 
-  function renderLinerGradient(label) {
+  function mapToLinerGradient(label) {
     return (
       <linearGradient
         key={label.id}
@@ -57,7 +57,7 @@ export default function MyAreaChart({ tasks, labels }) {
     );
   }
 
-  function renderArea(label) {
+  function mapToArea(label) {
     return (
       <Area
         key={label.id}
@@ -80,11 +80,11 @@ export default function MyAreaChart({ tasks, labels }) {
           data={trendData}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
-          <defs>{labels.map(renderLinerGradient)}</defs>
+          <defs>{labels.map(mapToLinerGradient)}</defs>
           <XAxis dataKey="time" stroke="#888" />
           <YAxis stroke="#888" />
           <Tooltip />
-          {labels.map(renderArea)}
+          {labels.map(mapToArea)}
         </AreaChart>
       </ResponsiveContainer>
     </section>

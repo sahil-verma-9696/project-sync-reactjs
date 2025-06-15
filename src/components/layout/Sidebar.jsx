@@ -24,8 +24,8 @@ export default function Sidebar({ navItems, open }) {
   const [shouldRenderTitle, titleRef] = useAnimatedPresence(open);
   const [shouldRenderFooter, footerRef] = useAnimatedPresence(open);
 
-  const renderNavItem = React.useCallback(
-    function renderNavItem({ id, label, icon: Icon, path }) {
+  const mapToNavItem = React.useCallback(
+    function mapToNavItem({ id, label, icon: Icon, path }) {
       const [shouldRenderLabel, labelRef] = useAnimatedPresence(open);
       return (
         <div
@@ -90,7 +90,7 @@ export default function Sidebar({ navItems, open }) {
         {!navItems && (
           <Skeleton open={open} fallbackNavItems={fallbackNavItems} />
         )}
-        {navItems?.map(renderNavItem)}
+        {navItems?.map(mapToNavItem)}
       </div>
 
       {/* nav footer */}
@@ -123,7 +123,7 @@ function Skeleton({ open, fallbackNavItems }) {
     return label.length * base + padding;
   }
 
-  function renderFallbackNavItem({ id, label }) {
+  function mapToFallbackNavItem({ id, label }) {
     return (
       <div
         key={id}
@@ -143,5 +143,5 @@ function Skeleton({ open, fallbackNavItems }) {
       </div>
     );
   }
-  return <div>{fallbackNavItems?.map(renderFallbackNavItem)}</div>;
+  return <div>{fallbackNavItems?.map(mapToFallbackNavItem)}</div>;
 }

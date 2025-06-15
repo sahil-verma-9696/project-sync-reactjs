@@ -1,12 +1,7 @@
 import { Edit, Ellipsis, Trash } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-export default function Menu({
-  onDelete,
-  onEdit,
-  positionClass = "top-0 right-0",
-  ...props
-}) {
+export default function Menu({ onDelete, onEdit, ...props }) {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
 
@@ -35,7 +30,7 @@ export default function Menu({
 
       {showMenu && (
         <ul
-          className={`absolute flex flex-col gap-2 bg-white dark:bg-[#1a1b1e] rounded-md shadow-md z-10 ${positionClass}`}
+          className={`absolute flex flex-col gap-2 bg-white dark:bg-[#1a1b1e] rounded-md shadow-md z-10 top-6 right-0`}
         >
           <button
             className="text-red-500 rounded-md flex items-center gap-2 cursor-pointer px-3 py-2 hover:bg-gray-100 dark:hover:bg-[#2a2a2e]"

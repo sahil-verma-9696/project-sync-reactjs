@@ -2,7 +2,7 @@ import React from "react";
 import { LABELS_COLOR } from "../../../data/constants";
 
 export default function LabelSummery({ labels, tasks }) {
-  function renderLabel(label) {
+  function mapToLabel(label) {
     const filterByTasksByLabel = (task) => task.label === label.title;
     return (
       <div
@@ -29,7 +29,7 @@ export default function LabelSummery({ labels, tasks }) {
       <h2 className="text-3xl font-semibold text-gray-800 dark:text-white mb-6">
         Labels
       </h2>
-      <div className="flex flex-wrap gap-6">{labels.map(renderLabel)}</div>
+      <div className="flex flex-wrap gap-6">{labels.map(mapToLabel)}</div>
     </section>
   );
 }
