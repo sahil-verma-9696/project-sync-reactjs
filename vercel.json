@@ -1,24 +1,8 @@
 {
-    "routes": [
-        {
-            "src": "/",
-            "dest": "/"
-        },
-        {
-            "src": "/overview",
-            "dest": "/"
-        },
-        {
-            "src": "/tasks",
-            "dest": "/"
-        },
-        {
-            "src": "/completed",
-            "dest": "/"
-        },
-        {
-            "src": "/settings",
-            "dest": "/"
-        }
-    ]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
 }
